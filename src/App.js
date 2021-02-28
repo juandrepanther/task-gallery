@@ -1,10 +1,11 @@
 import React from 'react';
+import Task from './components/Task'
 
 function App() {
   return (
-    <div>
-      <p>React App</p>
-    </div>
+    <React.Fragment>
+      <Task />
+    </React.Fragment>
   );
 }
 
