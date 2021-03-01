@@ -6,6 +6,7 @@ To run this App you need to:
 - clone it from this repository;
 - at your code editor via terminal run command npm i to install all dependencies;
 - type npm start to run this App for evaluation.
+- for demonstration you can check it here: http://janisdregeris.com/hidden
 
 Remarks:
 - for adding free pictures has been used https://pixabay.com free API for further developing;
