@@ -98,7 +98,7 @@ const Carousel = (props) => {
                             <div className="carousel-content"
                                 style={move === null ? 
                                             { transform: `translateX(-${index * 100}%)`} : 
-                                            { transform: `translateX(-${com}px)`}
+                                            { transform: `translateX(-${com*2}px)`}
                                             }> 
                                     {children}
                             </div>
