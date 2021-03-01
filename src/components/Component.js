@@ -5,10 +5,11 @@ const Carousel = (props) => {
     const {children} = props
     const [index, setIndex] = useState(0) //sakotnejais kartas numurs
     const [length, setLength] = useState(children.length) //kopejais attelu skaits virknee
-    const [pos, setPos] = useState(null)
-    const [move, setMove] = useState(null)
-    
+    const [pos, setPos] = useState(0)
+    const [move, setMove] = useState(0)
+    const [recent, setRecent] = useState(0)
 
+    //variable, lai dabutu selektoru vertibas
     const numberList = Array.from(Array(length).keys())
 
     //useEffect seit ir nepieciesams, lai noteiktu cik tad attelu buus un
@@ -16,7 +17,7 @@ const Carousel = (props) => {
     useEffect(() => {
         setLength(children.length)
     }, [children])
-
+    //pogu funcijas next un previous, kad desctop variantaa taas paraadisies
     const next = () => {
         if (index < (length - 1)) {
             setIndex(prevState => prevState + 1)
@@ -36,33 +37,22 @@ const Carousel = (props) => {
             setIndex(length - 1)
         }
     }
-
     //sakuma pozicija pieskarienam
     const handleTouchStart = (e) => {
         const touchDown = e.touches[0].clientX
         setPos(touchDown)
+        
     }
 
     const handleTouchMove = (e) => {
-        const touchDown = pos
-        
-            if(move === null && touchDown === null) {
+        const currentTouch = e.touches[0].clientX
+        const swipeLenght = pos - currentTouch
+        setMove(swipeLenght.toFixed(0))
+            if(move === null && pos === null) {
                 return
             }
-
-        const currentTouch = e.touches[0].clientX
-        const swipeLenght = touchDown - currentTouch
-        setMove(swipeLenght.toFixed(1))
-        
-            if (move === null && swipeLenght > 6) {
-                next()
-            }
-            if (move === null && swipeLenght < -6) {
-                previous()
-            }
-        setPos(null)
     }
-    console.log(move)
+    
     const Selector = () => {
         return (
             <div className='selectors-wrapper'>
@@ -74,7 +64,7 @@ const Carousel = (props) => {
                                 setPos(null)
                                 setMove(null)
                                 setIndex(i)
-                                
+                                setRecent(0)
                             }}
                             data-quotes={i}
                             />
@@ -83,8 +73,14 @@ const Carousel = (props) => {
             </div>
         )
     }
-    //translateX(-${move}px)
-//console.log(numberList)
+    //lai turpinaatu svaipu, seit buus funkcija par ieprieksejo poziciju
+    const defineRecent = (e) => {
+        const touchDown = e.changedTouches[0].clientX
+        const diference = pos - touchDown
+        setRecent(prevState => prevState + diference)
+    }
+    //common variable tiks izmantojama jau renderaa pie stila translateX
+    const common = parseInt(recent) + parseInt(move)
     return (
         <React.Fragment>
             <div className="carousel-container">
@@ -92,11 +88,13 @@ const Carousel = (props) => {
                     <button id='left' onClick={previous} className="left-arrow">&lt;</button>
                     <div className="carousel-content-wrapper"
                         onTouchStart={handleTouchStart}
-                        onTouchMove={handleTouchMove}>
+                        onTouchMove={handleTouchMove}
+                        onTouchEnd={defineRecent}
+                        >
                             <div className="carousel-content"
                                 style={move === null ? 
                                             { transform: `translateX(-${index * 100}%)`} : 
-                                            { transform: `translateX(-${move}px)`}
+                                            { transform: `translateX(-${common}px)`}
                                             }> 
                                     {children}
                             </div>
