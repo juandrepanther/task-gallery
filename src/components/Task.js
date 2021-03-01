@@ -4,10 +4,10 @@ import Component from '../components/Component'
 
 //izmantoju async await asinhronam darbibam un useEffect, lai nebutu infinite loop, jo setState paarrenderee. 
 //izmantoju pixabay.com api avotu. apikey ir seit? No stress. 
-//izmantoju json formatu, jo ir erts.
+
 //fetch ka vienu no parametriem ir amount, jo tur ir milzum daudz attelu
 //papildus divas pogas, kuras ielade citas lapas, kuraas ir citas bildes kjedee
-// kaa css allower izmantoju @emotion/react.
+
 
 const Task =() => {
     const [states, setStates] = useState({
