@@ -49,7 +49,7 @@ const Carousel = (props) => {
         const currentTouch = e.touches[0].clientX
         const swipeLenght = pos - currentTouch
         setMove(swipeLenght.toFixed(0))
-            if(move === null && pos === null) {
+            if(move === 0 && pos === 0) {
                 return
             }
         const common = parseInt(recent) + parseInt(move)
@@ -64,8 +64,8 @@ const Carousel = (props) => {
                         <div className={'rounds'} 
                             value={i}
                             onClick={()=> {
-                                setPos(null)
-                                setMove(null)
+                                setPos(0)
+                                setMove(0)
                                 setIndex(i)
                                 setRecent(0)
                             }}
@@ -96,7 +96,7 @@ const Carousel = (props) => {
                         onTouchEnd={defineRecent}
                         >
                             <div className="carousel-content"
-                                style={move === null ? 
+                                style={move === 0 ? 
                                             { transform: `translateX(-${index * 100}%)`} : 
                                             { transform: `translateX(-${com*2}px)`}
                                             }> 
