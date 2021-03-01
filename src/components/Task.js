@@ -31,15 +31,14 @@ useEffect(() => {
 },[states.page]) //dependency ir page lapas
 
     return  <div className='big-container'>
+            <div className='button-wrapper'>
+                    <button onClick={()=> setStates({...states, page: states.page - 1 })}>Previous Page</button>
+                    <button className='bottom' onClick={()=> setStates({...states, page: states.page + 1 })}>Next Page</button>
+                </div>
                 <Component>
                         {states.images && Object.values(states.images.hits).map(i=> {
                             return    <img alt='' src={i.webformatURL} />})}
                 </Component>
-                <div className='button-wrapper'>
-                    <button onClick={()=> setStates({...states, page: states.page - 1 })}>Previous Page</button>
-                    <button className='bottom' onClick={()=> setStates({...states, page: states.page + 1 })}>Next Page</button>
-                </div>
-
             </div>
         
     
