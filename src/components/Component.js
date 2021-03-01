@@ -87,7 +87,9 @@ const Carousel = (props) => {
     console.log(common)
     return (
         <React.Fragment>
+            <Selector />
             <div className="carousel-container">
+                
                 <div className="carousel-wrapper">
                     <button id='left' onClick={previous} className="left-arrow">&lt;</button>
                     <div className="carousel-content-wrapper"
@@ -106,7 +108,6 @@ const Carousel = (props) => {
                     {<button id='right' onClick={next} className="right-arrow">&gt;</button>}
                 </div>
             </div>
-            <Selector />
         </React.Fragment>
     )
 }
