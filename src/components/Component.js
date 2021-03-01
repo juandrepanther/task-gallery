@@ -8,6 +8,7 @@ const Carousel = (props) => {
     const [pos, setPos] = useState(0)
     const [move, setMove] = useState(0)
     const [recent, setRecent] = useState(0)
+    const [com, setCom] = useState(0)
 
     //variable, lai dabutu selektoru vertibas
     const numberList = Array.from(Array(length).keys())
@@ -51,8 +52,10 @@ const Carousel = (props) => {
             if(move === null && pos === null) {
                 return
             }
+        const common = parseInt(recent) + parseInt(move)
+        setCom(common)
     }
-    
+    console.log(index)
     const Selector = () => {
         return (
             <div className='selectors-wrapper'>
@@ -81,6 +84,7 @@ const Carousel = (props) => {
     }
     //common variable tiks izmantojama jau renderaa pie stila translateX
     const common = parseInt(recent) + parseInt(move)
+    console.log(common)
     return (
         <React.Fragment>
             <div className="carousel-container">
@@ -94,7 +98,7 @@ const Carousel = (props) => {
                             <div className="carousel-content"
                                 style={move === null ? 
                                             { transform: `translateX(-${index * 100}%)`} : 
-                                            { transform: `translateX(-${common}px)`}
+                                            { transform: `translateX(-${com}px)`}
                                             }> 
                                     {children}
                             </div>
