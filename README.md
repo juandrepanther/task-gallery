@@ -26,9 +26,5 @@ Remarks:
 - Code is absolutelly made by me and also included some comments before written code;
 - Code was made by using one of the latest VSCode code editor without code Prettier;
 
-Challanges regarding on Task requirements:
-"Must work for any HTML content" - I understood it as Dynamical Images and code must be ready for any amount of images (I have done that), but not sure.
-"Any optimizations related to performance are welcome and appreciated!" - Havent done, no practice on that yet.
-"Supports multiple slides on the screen" - Havent done.
 
 Thank you and waiting for response!
