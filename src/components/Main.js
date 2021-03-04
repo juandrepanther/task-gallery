@@ -19,7 +19,6 @@ function Main(props) {
   }, [children]);
 
   const next = () => {
-    
     setMove(0) 
     if (index < length - 1) {
       setIndex((prevState) => prevState + 1);
@@ -68,7 +67,7 @@ function Main(props) {
                   setPosition(0);
                   setMove(0);
                   setIndex(i);
-                  setRecentPosition(parseInt(i * 200));
+                  setRecentPosition(parseInt(i * 600));
                 }}
                 data-quotes={i}
               />
@@ -78,11 +77,12 @@ function Main(props) {
       </div>
     );
   };
-
+console.log(position)
+console.log(move)
   const handleDefineRecent = (e) => {
     const touchDown = e.changedTouches[0].clientX
     const diference = position - touchDown
-    setRecentPosition((prevState) => prevState + diference)
+    setRecentPosition(prevState => prevState + diference)
   };
 
   const gestureStart = (e) => {
@@ -107,9 +107,7 @@ function Main(props) {
     setClicked(false);
   };
 
-  const preventDrag = (e) => {
-    e.preventDefault();
-  };
+  const preventDrag = (e) => e.preventDefault();
 
   return (
     <React.Fragment>
