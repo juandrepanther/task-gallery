@@ -1,47 +1,59 @@
 import React, { useState, useEffect } from 'react'
 import '../styles/Task.scss'
-import Component from '../components/Component'
+import Main from '../components/Main'
 
-//izmantoju async await asinhronam darbibam un useEffect, lai nebutu infinite loop, jo setState paarrenderee. 
-//izmantoju pixabay.com api avotu. apikey ir seit? No stress. 
+function Task() {
+  const [states, setStates] = useState({
+    searchText: "",
+    amount: 7,
+    apiUrl: "https://pixabay.com/api",
+    apiKey: "20440908-bda69edb9fa53c777351119cb",
+    images: "",
+    page: 3,
+    width: 700,
+    height: 400,
+  });
 
-//fetch ka vienu no parametriem ir amount, jo tur ir milzum daudz attelu
-//papildus divas pogas, kuras ielade citas lapas, kuraas ir citas bildes kjedee
-
-
-const Task =() => {
-    const [states, setStates] = useState({
-        searchText: '',
-        amount: 5,
-        apiUrl: 'https://pixabay.com/api',
-        apiKey: '20440908-bda69edb9fa53c777351119cb',
-        images: '',
-        page: 3,
-        width: 700,
-        height: 400
-    })
-      
-useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
-    await fetch(`${states.apiUrl}/?key=${states.apiKey}&per_page=${states.amount}&page=${states.page}&safesearch=${true}`) //iznaca url ar vairakiem parametriem
-    .then(response => response.json())
-    .then(json => setStates({...states, images: json}))  //json dati tiek parnesti uz states  
-    }
-    fetchData()
-},[states.page]) //dependency ir page lapas
+      await fetch(
+        `${states.apiUrl}/?key=${states.apiKey}&per_page=${
+          states.amount
+        }&page=${states.page}&safesearch=${true}`
+      )
+        .then((response) => response.json())
+        .then((json) => setStates({ ...states, images: json }));
+    };
+    fetchData();
+  }, [states.page]);
 
-    return  <div className='big-container'>
-            <div className='button-wrapper'>
-                    <button onClick={()=> setStates({...states, page: states.page - 1 })}>Previous Page</button>
-                    <button className='bottom' onClick={()=> setStates({...states, page: states.page + 1 })}>Next Page</button>
-                </div>
-                <Component>
-                        {states.images && Object.values(states.images.hits).map(i=> {
-                            return    <img alt='' src={i.webformatURL} />})}
-                </Component>
-            </div>
-        
-    
+  console.log(states.images.hits);
+  return (
+    <div className="big-container">
+      <div className="button-wrapper">
+        <button onClick={() => setStates({ ...states, page: states.page - 1 })}>
+          Previous Page
+        </button>
+        <button
+          className="bottom"
+          onClick={() => setStates({ ...states, page: states.page + 1 })}
+        >
+          Next Page
+        </button>
+      </div>
+      <Main>
+        {states.images &&
+          Object.values(states.images.hits).map((i) => {
+            return (
+              <div className="content-wrapper">
+                <img alt="" src={i.webformatURL} />
+                <div className="hover-text">{i.user}</div>
+              </div>
+            );
+          })}
+      </Main>
+    </div>
+  );
 }
 
-export default Task
+export default Task;
