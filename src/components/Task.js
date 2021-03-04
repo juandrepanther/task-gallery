@@ -13,6 +13,7 @@ function Task() {
     width: 700,
     height: 400,
   });
+  const [mouseOver, setMouseOver] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,29 +28,35 @@ function Task() {
     fetchData();
   }, [states.page]);
 
-  console.log(states.images.hits);
+  const mouseOverHandler = () => setMouseOver(true);
+  const mouseLeaveHandler = () => setMouseOver(false);
+
   return (
     <div className="big-container">
       <div className="button-wrapper">
         <button onClick={() => setStates({ ...states, page: states.page - 1 })}>
-          Previous Page
+          Previous 7 Images
         </button>
         <button
           className="bottom"
           onClick={() => setStates({ ...states, page: states.page + 1 })}
         >
-          Next Page
+          Next 7 Images
         </button>
       </div>
       <Main>
         {states.images &&
           Object.values(states.images.hits).map((i) => {
-            return (
-              <div className="content-wrapper">
-                <img alt="" src={i.webformatURL} />
-                <div className="hover-text">{i.user}</div>
-              </div>
-            );
+            return <div className='content-wrapper'>
+                    <img
+                      alt=""
+                      src={i.webformatURL}
+                      onMouseOver={mouseOverHandler}
+                      onMouseLeave={mouseLeaveHandler}
+                    />
+                    {mouseOver ? <div className="hover-text">{i.user}</div> : ""}
+                  </div>
+            
           })}
       </Main>
     </div>
