@@ -24,6 +24,7 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
+  border-radius: 15px;
 }
 
 .carousel-content {
@@ -31,7 +32,8 @@
   transition: all 250ms linear;
 }
 
-.carousel-content::-webkit-scrollbar, .carousel-content::-webkit-scrollbar {
+.carousel-content::-webkit-scrollbar,
+.carousel-content::-webkit-scrollbar {
   display: none;
 }
 
@@ -42,7 +44,8 @@
   flex-grow: 1;
 }
 
-.left-arrow, .right-arrow {
+.left-arrow,
+.right-arrow {
   position: absolute;
   z-index: 999;
   top: 50%;
@@ -50,12 +53,13 @@
   width: 48px;
   height: 48px;
   border-radius: 24px;
-  background-color: white;
+  background-color: rgb(160, 160, 160);
   border: transparent;
   opacity: 0.5;
 }
-#left, #right:focus {
-  background-color: rgb(255, 190, 144);
+#left,
+#right:focus {
+  background-color: rgb(177, 177, 177);
 }
 .button-wrapper {
   height: 30px;
@@ -93,11 +97,30 @@ img {
   &:active {
     background-color: grey;
   }
+}
+.hover-text {
+  width: 300px;
+  height: 60px;
+  background-color: rgba(255, 255, 255, 0.2);
+  position: absolute;
+  bottom: 0;
+  border-radius: 17px;
+  text-align: center;
+  font-size: 30px;
+  color: rgb(206, 206, 206);
   
+}
+.content-wrapper {
+  height: 50vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (hover: none) and (pointer: coarse) {
-  .left-arrow, .right-arrow {
-      display: none;
+  .left-arrow,
+  .right-arrow {
+    display: none;
   }
 }
