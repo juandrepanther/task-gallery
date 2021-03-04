@@ -135,7 +135,7 @@ console.log(move)
                   : { transform: `translateX(-${actionMove * 2}px)` }
               }
             >
-              {children}
+              {props.children}
             </div>
           </div>
           {
@@ -150,75 +150,4 @@ console.log(move)
 }
 
 export default Main;
-console.log(move)
-  const handleDefineRecent = (e) => {
-    const touchDown = e.changedTouches[0].clientX
-    const diference = position - touchDown
-    setRecentPosition(prevState => prevState + diference)
-  };
 
-  const gestureStart = (e) => {
-    const start = e.clientX;
-    setPosition(start);
-    setClicked(true);
-  };
-
-  const gestureMove = (e) => {
-    if (clicked) {
-      const start = e.clientX;
-      const lenght = position - start;
-      setMove(lenght.toFixed(0));
-      setCom(common);
-    } 
-  };
-
-  const gestureEnd = (e) => {
-    const recent = e.clientX
-    const diference = position - recent
-    setRecentPosition((prevState) => prevState + diference)
-    setClicked(false);
-  };
-
-  const preventDrag = (e) => e.preventDefault();
-
-  return (
-    <React.Fragment>
-      <Selector />
-      <div className="carousel-container">
-        <div className="carousel-wrapper">
-          <button id="left" onClick={previous} className="left-arrow">
-            &lt;
-          </button>
-          <div
-            className="carousel-content-wrapper"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleDefineRecent}
-            onMouseDown={gestureStart}
-            onMouseMove={gestureMove}
-            onMouseUp={gestureEnd}
-            onDragStart={preventDrag}
-          >
-            <div
-              className="carousel-content"
-              style={
-                move === 0 
-                  ? { transform: `translateX(-${index * 100}%)` }
-                  : { transform: `translateX(-${com * 2}px)` }
-              }
-            >
-              {children}
-            </div>
-          </div>
-          {
-            <button id="right" onClick={next} className="right-arrow">
-              &gt;
-            </button>
-          }
-        </div>
-      </div>
-    </React.Fragment>
-  );
-}
-
-export default Main;
