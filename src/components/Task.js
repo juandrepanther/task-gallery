@@ -14,18 +14,27 @@ function Task() {
       height: 400,
     });
     const [mouseOver, setMouseOver] = useState(false);
- 
+
     useEffect(() => {
-      const fetchData = async () => {
-        await fetch(
-          `${states.apiUrl}/?key=${states.apiKey}&per_page=${
-            states.amount
-          }&page=${states.page}&safesearch=${true}`
-        )
-          .then((response) => response.json())
-          .then((json) => setStates({ ...states, images: json }));
-      };
-      fetchData();
+      async function data() {
+        await new Promise(res=> {
+          const fetchData = async () => {
+            await fetch(
+              `${states.apiUrl}/?key=${states.apiKey}&per_page=${
+                states.amount
+              }&page=${states.page}&safesearch=${true}`
+            )
+              .then((response) => response.json())
+              .then((json) => setStates({ ...states, images: json }));
+          }
+          fetchData()
+          res()
+        })
+        .catch(err => console.log('Error in Fetching Data: ', err))
+
+      }
+      data()
+      
     }, [states.page])
 
     const mouseOverHandler = () => setMouseOver(true);
@@ -62,7 +71,6 @@ function Task() {
           height='300px'
           width='533px'
           />
-          
         </div>
       </div>
     );
