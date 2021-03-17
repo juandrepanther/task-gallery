@@ -1,3 +1,10 @@
+body {
+  background-color: #00DBDE;
+background-image: linear-gradient(90deg, #00DBDE 0%, #FC00FF 100%);
+
+height: 100vh;
+}
+
 .big-container {
   display: flex;
   justify-content: center;
@@ -8,11 +15,13 @@
   overflow-x: hidden;
 }
 
+
 .carousel-container {
-  max-width: 1200px;
+  width: 746px;
   max-height: 800px;
   display: flex;
   flex-direction: column;
+  
 }
 
 .carousel-wrapper {
@@ -112,15 +121,25 @@ img {
 }
 .content-wrapper {
   height: 50vh;
-  width: 100%;
+  width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+video {
+  border-radius: 17px;
 }
 
 @media (hover: none) and (pointer: coarse) {
   .left-arrow,
   .right-arrow {
     display: none;
+  }
+}
+
+
+@media screen and (width: 300px) {
+  .carousel-container {
+    max-width: 200px;
   }
 }
